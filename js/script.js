@@ -34,7 +34,6 @@ function customPage(){
 }
 
 function normalPage(){
-    
     var element = document.getElementsByTagName('body')[0];
     element.classList.remove('classCustom');
 }
