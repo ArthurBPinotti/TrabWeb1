@@ -10,7 +10,6 @@ function setaCookie() {
     }
 
     document.cookie = "username="+userName; 
-    document.cookie = "password="+userSenha; 
     console.log(document.cookie);
     window.location.href = "index.html";
 }
@@ -18,7 +17,7 @@ function setaCookie() {
 
 function loginCheck() {
     if (document.cookie != '') {
-        var userName = document.cookie.split(';')[0].split('=')[1];
+        var userName = document.cookie.split('=')[1];
         document.getElementById('imgUser').style.display = 'block';
         document.getElementById('userName').innerHTML = userName;
     } 

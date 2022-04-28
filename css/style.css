@@ -43,7 +43,6 @@ body{
   vertical-align: middle;
 }
 
-
 .textoLogin{
   font-weight: bold;
 }
@@ -57,12 +56,12 @@ body{
   margin-right: auto;
 }
 
-.cardLogin{
-  width: 40%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10%;
+@media (max-width: 800px)
+{
+   .cardCadastro
+   {
+    width: 80%;
+   }
 }
 
 .cardCadastro{
@@ -72,7 +71,7 @@ body{
   margin-right: auto;
 }
 
-.cardLogin h3{
+.cardCadastro h3{
   padding-bottom: 1em;
 }
 
@@ -98,7 +97,7 @@ body{
   cursor: pointer;
 
   text-align: center;
-  width: 30%;
+  width: 40%;
 
   background-color: #8BC34A;
 }
