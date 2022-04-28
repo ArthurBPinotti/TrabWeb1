@@ -1,7 +1,16 @@
 function setaCookie() {
+    var userName = document.getElementById('editNome').value;
+    var userSenha = document.getElementById('editSenha').value;
 
-    document.cookie = "username="+document.getElementById('userName').value; 
-    document.cookie = "password="+document.getElementById('password').value; 
+    if (userName == "" || userSenha == "")
+    {
+        alert("O nome de usuário e a senha devem ser informados!")
+
+        return;
+    }
+
+    document.cookie = "username="+userName; 
+    document.cookie = "password="+userSenha; 
     console.log(document.cookie);
     window.location.href = "index.html";
 }
@@ -26,11 +35,3 @@ function normalPage(){
     var element = document.getElementsByTagName('body')[0];
     element.classList.remove('classCustom');
 }
-
-// document.cookie = "username="+document.getElementById('login').value;
-    // document.cookie = "password="+document.getElementById('senha').value;
-    // document.cookie = "sexo="+document.getElementById('sexo').value;
-    // document.cookie = "cor="+document.getElementById('cor').value;
-    // document.cookie = "dtNasc="+document.getElementById('dtNasc').value;
-    // document.cookie = "notificar="+document.getElementById('notificar').value;
-    // console.log(document.cookie);

@@ -1,48 +1,81 @@
-#footer{
-  background-color: #343a40 !important;
-  color: #fff;
-  text-align: left ;
-  position: fixed;
-  padding: 10px 10px 10px 10px !important;
-  bottom: 0;
-  width: 100%;
-  /* Height of the footer*/ 
-  height: 40px;
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.containerHome{
-  padding: 10px 10px 10px 10px ;
-  margin-top: 1em;
-  margin-bottom: 1em;
+.container
+{
+  padding: 2em;
 }
 
-#primeiroContanier{
-  margin-top: 5em !important;
+.principal
+{
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
-#ultimoContainer{
-  margin-bottom: 5em !important;
+.integrantes
+{
+  text-align: center;
 }
 
-.imgsNav{
-  margin-left: 0.7em;
-  margin-right: 0.7em;
+.footer{
+  background-color: #343a40;
+
+  color: whitesmoke;
+
+  padding: 1em;
+  margin-top: auto;
+}
+
+#userName{
+  color: whitesmoke;
+  font-weight: bold;
+  margin: auto;
+  margin-right: 1em;
+
+  vertical-align: middle;
+}
+
+
+.textoLogin{
+  font-weight: bold;
 }
 
 .imgHome{
-  margin-left: 20em;
-  margin-right: 20em;
+  width: 50%;
+  height: 80%;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-
-.login-container{
-  margin-top: 5%;
-  margin-bottom: 5%;
+.cardLogin{
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
 }
+
+.cardCadastro{
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cardLogin h3{
+  padding-bottom: 1em;
+}
+
 .login-form-1{
-  padding: 5%;
+  padding: 2%;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
+
 .login-form-1 h3{
   text-align: center;
   color: #333;
@@ -51,23 +84,30 @@
 .login-container form{
   padding: 10%;
 }
+
 .btnSubmit
 {
-  width: 50%;
   border-radius: 1rem;
   padding: 1.5%;
   border: none;
   cursor: pointer;
+
+  text-align: center;
+  width: 30%;
+
+  background-color: #8BC34A;
 }
-.login-form-1 .btnSubmit{
-  font-weight: 600;
-  color: #fff;
-  background-color: #0062cc;
+
+.btnSubmit:hover
+{
+  font-weight: bold;
+
+  background-color: #56A830;
 }
-.login-form-1 .ForgetPwd{
-  color: #0062cc;
-  font-weight: 600;
-  text-decoration: none;
+
+.btnSubmit:active
+{
+  background-color: #F44336;
 }
 
 .classCustom{
