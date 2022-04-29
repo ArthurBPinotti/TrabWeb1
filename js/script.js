@@ -10,7 +10,6 @@ function setaCookie() {
     }
 
     document.cookie = "username="+userName; 
-    console.log(document.cookie);
     window.location.href = "index.html";
 }
 
