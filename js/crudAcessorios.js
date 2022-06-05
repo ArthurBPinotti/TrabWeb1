@@ -5,6 +5,10 @@ function salvarAcessorio() {
     var valor = document.getElementById('fValor').value;
     var qtd = document.getElementById('fQtd').value;
 
+    //Salva no localStorage
+    var acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
+    
+    //Procura pelo codigo (na ideia de ser um id unico)
     const objAcessorio = {
         'codigo': codigo,
         'nome' : nome,
@@ -13,53 +17,60 @@ function salvarAcessorio() {
         'qtd' : qtd
     }
 
-    //Salva no localStorage
-    var acessoriosCadastrados = localStorage.getItem('acessorios');
-    
-    //Procura para editar ou dar push
-    localStorage.setItem('acessorio' + codigo, JSON.stringify(objAcessorio));
+    var indexObj = -1;
 
-    adicionaAcessorio(codigo);
+    console.log(acessoriosCadastrados);
+
+    if (acessoriosCadastrados != null)
+    {
+        for (var idx = 0; idx < acessoriosCadastrados.length; ++idx)
+        {
+            if (acessoriosCadastrados[idx]['codigo'] == codigo)
+            {
+                indexObj = idx;
+                break;
+            }
+        }
+    }
+    else
+        acessoriosCadastrados = [];
+
+    if (indexObj == -1) //Não encontrou nenhum com o mesmo codigo, deve adicioanr um novo
+        acessoriosCadastrados.push(objAcessorio);
+    else //Apenas editar o já existente
+        acessoriosCadastrados[indexObj] = objAcessorio;
+
+    localStorage.setItem('acessorios', JSON.stringify(acessoriosCadastrados));
+
+    recarregaTabelaAcessorios();
 }
 
-function recarregaTabelaAcessorios() //Limpa e remonta pra considerar as edições e remoções
+function recarregaTabelaAcessorios() //Limpa e remonta a tabela na tela de cadastros pra considerar as edições e remoções
 {
     var corpoTabela = document.getElementById("corpoTabelaAcessorios");
-    var novaLinha = document.createElement("tr");
 
-    var objAcessorio = JSON.parse(localStorage.getItem('acessorio'+codigo));
+    const acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
+    console.log("careg" + acessoriosCadastrados);
 
-    for (var chave in objAcessorio) {
-        var novaCelula = document.createElement("td");
-        novaCelula.innerText = objAcessorio[chave];
-        novaLinha.appendChild(novaCelula);
+    for (var acessorio in acessoriosCadastrados)
+    {
+        console.log(acessorio);
+
+        var novaLinha = document.createElement("tr");
+
+        for (var chave in acessorio)
+        {
+            var novaCelula = document.createElement("td");
+            novaCelula.innerText = acessorio[chave];
+            novaLinha.appendChild(novaCelula);
+        }
+
+        //Adiciona os botões para editar e excluir
+        novaLinha.innerHTML += '<button onClick="carregarInfo(' + acessorio['codigo'] + ')" class="btnAcao btn-primary">Editar</button>';
+        novaLinha.innerHTML += '<button onClick="excluirAcessorio(' + acessorio['codigo'] + ')" class="btnAcao btn-danger">Excluir</button>'
+
+        corpoTabela.appendChild(novaLinha);
     }
-
-    //Adiciona os botões para editar e excluir
-    novaLinha.innerHTML += '<button onClick="carregarInfo(' + codigo + ')" class="btnAcao btn-primary">Editar</button>';
-    novaLinha.innerHTML += '<button onClick="excluirAcessorio(' + codigo + ')" class="btnAcao btn-danger">Excluir</button>'
-
-    corpoTabela.appendChild(novaLinha);
-}
-
-function adicionaAcessorio(codigo)
-{
-    var corpoTabela = document.getElementById("corpoTabelaAcessorios");
-    var novaLinha = document.createElement("tr");
-
-    var objAcessorio = JSON.parse(localStorage.getItem('acessorio'+codigo));
-
-    for (var chave in objAcessorio) {
-        var novaCelula = document.createElement("td");
-        novaCelula.innerText = objAcessorio[chave];
-        novaLinha.appendChild(novaCelula);
-    }
-
-    //Adiciona os botões para editar e excluir
-    novaLinha.innerHTML += '<button onClick="carregarInfo(' + codigo + ')" class="btnAcao btn-primary">Editar</button>';
-    novaLinha.innerHTML += '<button onClick="excluirAcessorio(' + codigo + ')" class="btnAcao btn-danger">Excluir</button>'
-
-    corpoTabela.appendChild(novaLinha);
 }
 
 function carregarInfo(codigo)
