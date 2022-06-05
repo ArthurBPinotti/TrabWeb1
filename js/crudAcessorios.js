@@ -1,14 +1,47 @@
 function salvarAcessorio() {
-    var codigo = document.getElementById('fCodigo').value;
-    var nome = document.getElementById('fNome').value;
-    var fornecedor = document.getElementById('fFornecedor').value;
-    var valor = document.getElementById('fValor').value;
-    var qtd = document.getElementById('fQtd').value;
+    //Validação dos dados por aqui para náo depender dos eventos do form
+    const codigo = document.getElementById('fCodigo').value;
+    if (codigo == "")
+    {
+        alert("O código deve ser informado!");
+        document.getElementById("fCodigo").focus();
+        return;
+    }
 
-    //Salva no localStorage
+    const nome = document.getElementById('fNome').value;
+    if (nome == "")
+    {
+        alert("O nome deve ser informado!");
+        document.getElementById("fNome").focus();
+        return;
+    }
+
+    const fornecedor = document.getElementById('fFornecedor').value;
+    if (fornecedor == "")
+    {
+        alert("O fornecedor deve ser informado!");
+        document.getElementById("fFornecedor").focus();
+        return;
+    }
+
+    const valor = document.getElementById('fValor').value;
+    if (valor == "")
+    {
+        alert("O fornecedor deve ser informado!");
+        document.getElementById("fFornecedor").focus();
+        return;
+    }
+    
+    const qtd = document.getElementById('fQtd').value;
+    if (qtd == "")
+    {
+        alert("A quantidade em estoque deve ser informada!");
+        document.getElementById("fQtd").focus();
+        return;
+    }
+
     var acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
     
-    //Procura pelo codigo (na ideia de ser um id unico)
     const objAcessorio = {
         'codigo': codigo,
         'nome' : nome,
@@ -17,23 +50,10 @@ function salvarAcessorio() {
         'qtd' : qtd
     }
 
-    var indexObj = -1;
-
-    console.log(acessoriosCadastrados);
-
-    if (acessoriosCadastrados != null)
-    {
-        for (var idx = 0; idx < acessoriosCadastrados.length; ++idx)
-        {
-            if (acessoriosCadastrados[idx]['codigo'] == codigo)
-            {
-                indexObj = idx;
-                break;
-            }
-        }
-    }
-    else
+    if (acessoriosCadastrados == null)
         acessoriosCadastrados = [];
+
+    var indexObj = pegaIndexPorCodigo(codigo);
 
     if (indexObj == -1) //Não encontrou nenhum com o mesmo codigo, deve adicioanr um novo
         acessoriosCadastrados.push(objAcessorio);
@@ -42,16 +62,25 @@ function salvarAcessorio() {
 
     localStorage.setItem('acessorios', JSON.stringify(acessoriosCadastrados));
 
-    recarregaTabelaAcessorios();
+    recarregaTabelaAcessorios("cadastro");
 }
 
-function recarregaTabelaAcessorios() //Limpa e remonta a tabela na tela de cadastros pra considerar as edições e remoções
+function recarregaTabelaAcessorios(tipo) //Limpa e remonta a tabela na tela de cadastros pra considerar as edições e remoções
 {
-    var corpoTabela = document.getElementById("corpoTabelaAcessorios");
-    corpoTabela.innerHTML = "";
+    var corpoTabela = null;
+
+    console.log("tipo : " + tipo);
+
+    if (tipo == "cadastro")
+        corpoTabela = document.getElementById("corpoTabelaAcessorios");
+    else if (tipo == "relatorio")
+        corpoTabela = document.getElementById("corpoTabelaAcessoriosRelatorio");
+    else
+        return;
+
+    corpoTabela.innerHTML = ""; //Limpa as <tr> do corpo
 
     const acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
-    console.log(acessoriosCadastrados);
 
     for (var idx = 0; idx < acessoriosCadastrados.length; ++idx)
     {
@@ -65,26 +94,65 @@ function recarregaTabelaAcessorios() //Limpa e remonta a tabela na tela de cadas
             novaLinha.appendChild(novaCelula);
         }
 
-        //Adiciona os botões para editar e excluir
-        novaLinha.innerHTML += '<button onClick="carregarInfo(' + acessorio['codigo'] + ')" class="btnAcao btn-primary">Editar</button>';
-        novaLinha.innerHTML += '<button onClick="excluirAcessorio(' + acessorio['codigo'] + ')" class="btnAcao btn-danger">Excluir</button>'
-
+        if (tipo == "cadastro") //Adiciona os botões para editar e excluir
+        {
+            novaLinha.innerHTML += '<button onClick="carregaInfo(' + acessorio['codigo'] + ')" class="btnAcao btn-primary align-middle">Editar</button>';
+            novaLinha.innerHTML += '<button onClick="excluiAcessorio(' + acessorio['codigo'] + ')" class="btnAcao btn-danger align-middle">Excluir</button>'
+        }
+        
         corpoTabela.appendChild(novaLinha);
     }
 }
 
-function carregarInfo(codigo)
+function carregaInfo(codigo)
 {
-    var objAcessorio = JSON.parse(localStorage.getItem('acessorio'+ codigo));
+    const acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
 
-    document.getElementById('fCodigo').value = objAcessorio['codigo'];
-    document.getElementById('fNome').value = objAcessorio['nome'];
-    document.getElementById('fFornecedor').value = objAcessorio['fornecedor'];
-    document.getElementById('fValor').value = objAcessorio['valor'];
-    document.getElementById('fQtd').value = objAcessorio['qtd'];
+    if (acessoriosCadastrados != null)
+    {
+        for (var idx = 0; idx < acessoriosCadastrados.length; ++idx)
+        {
+            if (acessoriosCadastrados[idx]['codigo'] == codigo)
+            {
+                const objAcessorio = (acessoriosCadastrados[idx]);
+
+                document.getElementById('fCodigo').value = objAcessorio['codigo'];
+                document.getElementById('fNome').value = objAcessorio['nome'];
+                document.getElementById('fFornecedor').value = objAcessorio['fornecedor'];
+                document.getElementById('fValor').value = objAcessorio['valor'];
+                document.getElementById('fQtd').value = objAcessorio['qtd'];
+                break;
+            }
+        }
+    }
 }
 
-function excluirAcessorio(codigo)
+function excluiAcessorio(codigo)
 {
-    localStorage.removeItem('acessorio' + codigo);
+    var idxAcessorio = pegaIndexPorCodigo(codigo);
+
+    if (idxAcessorio == -1)
+        return;
+
+    var acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
+    acessoriosCadastrados.splice(idxAcessorio, 1);
+
+    localStorage.setItem('acessorios', JSON.stringify(acessoriosCadastrados));
+    recarregaTabelaAcessorios("cadastro");
+}
+
+function pegaIndexPorCodigo(codigo)
+{
+    const acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
+
+    if (acessoriosCadastrados != null)
+    {
+        for (var idx = 0; idx < acessoriosCadastrados.length; ++idx)
+        {
+            if (acessoriosCadastrados[idx]['codigo'] == codigo)
+                return idx;
+        }
+    }
+
+    return -1;
 }

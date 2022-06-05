@@ -17,7 +17,7 @@
     <link rel="icon" type="image/x-icon" href="/imgs/fav.ico">
   </head>
 
-  <body onload="loginCheck(); recarregaTabelaAcessorios('cadastro')">
+  <body onload="loginCheck(); recarregaTabelaAcessorios('relatorio')">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a href="index.html"><img class="imgsNav" src="imgs/logo.png" alt="Logo" width="50" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,65 +76,22 @@
     <main class="principal flex-shrink-0">
       <div class="container bg-body rounded shadow-sm" >
         <div class="container pt-0 mt-0 align-center">
-            <div class="cardCadastroAcessorio card login-form-1">
-                <h3>Cadastro de Acessórios</h3>
-                <form id="formCadastroAcessorio">
-                  <div class="row justify-content-between text-left">
-                      <div class="form-group col-sm-6 flex-column d-flex"> 
-                          <label class="form-control-label" for="fCodigo">Código</label> 
-                          <input type="number" id="fCodigo" name="fCodigo" placeholder="Ex: 1" required> 
-                      </div>
-
-                      <div class="form-group col-sm-6 flex-column d-flex">
-                          <label class="form-control-label" for="fNome">Nome</label> 
-                          <input type="text" id="fNome" name="fNome" placeholder="Ex: Bomba de água" required>
-                      </div>
-                  </div>
-                  <div class="row justify-content-between text-left">
-                      <div class="form-group col-sm-6 flex-column d-flex"> 
-                          <label class="form-control-label" for="fFornecedor">Fornecedor</label> 
-                          <input type="text" id="fFornecedor" name="fFornecedor" placeholder="Ex: Casas Bahia" required> 
-                      </div>
-
-                      <div class="form-group col-sm-6 flex-column d-flex">
-                          <label class="form-control-label" for="fValor">Valor</label> 
-                          <input type="number" step=0.01 id="fValor" name="fValor" placeholder="Ex: 12.23" required>
-                      </div>
-                  </div>
-                  <div class="row justify-content-between text-left">
-                      <div class="form-group col-sm-6 flex-column d-flex"> 
-                          <label class="form-control-label" for="fQtd">Quantidade em estoque</label> 
-                          <input type="number" id="fQtd" name="fQtd" placeholder="Ex: 25" required> 
-                      </div>
-                  </div>
-                  <div class="row justify-content-end">
-                      <div class="form-group col-sm-6"> <input type="submit" onClick="salvarAcessorio()" class="btnSubmit" value="Salvar"></div>
-                  </div>
-                </form>
-              </div>
-            </div>
+          <h1>Relatório de Acessórios</h1>
+          <table id="tabelaAcessoriosRelatorio" class="table thead-dark table-striped table-hover table-responsive" onload='carregaRealtorioAcessorios("relatorio")'>
+              <thead>
+                  <tr>
+                      <th class="col-md-1">Código</th>
+                      <th class="col-md-2">Nome</th>
+                      <th class="col-md-2">Fornecedor</th>
+                      <th class="col-md-1">Valor</th>
+                      <th class="col-md-1">Quantidade em Estoque</th>
+                  </tr>
+              </thead>
+              <tbody id="corpoTabelaAcessoriosRelatorio">
+              </tbody>
+          </table>
         </div>
 
-        <div class="container">
-            <h3>Acessórios já cadastrados</h3>
-            <a href="relatorioAcessorios.html">
-              <button class="btn btn-info">Relatório</button>
-            </a>
-            <table id="tabelaAcessorios" class="table thead-dark table-striped table-hover table-responsive">
-                <thead>
-                    <tr>
-                        <th class="col-md-1">Código</th>
-                        <th class="col-md-2">Nome</th>
-                        <th class="col-md-2">Fornecedor</th>
-                        <th class="col-md-1">Valor</th>
-                        <th class="col-md-1">Quantidade em Estoque</th>
-                        <th class="col-md-1">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="corpoTabelaAcessorios">
-                </tbody>
-            </table>
-        </div>
     </main>
 
     <footer class="footer">
