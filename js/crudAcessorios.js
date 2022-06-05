@@ -48,15 +48,15 @@ function salvarAcessorio() {
 function recarregaTabelaAcessorios() //Limpa e remonta a tabela na tela de cadastros pra considerar as edições e remoções
 {
     var corpoTabela = document.getElementById("corpoTabelaAcessorios");
+    corpoTabela.innerHTML = "";
 
     const acessoriosCadastrados = JSON.parse(localStorage.getItem('acessorios'));
-    console.log("careg" + acessoriosCadastrados);
+    console.log(acessoriosCadastrados);
 
-    for (var acessorio in acessoriosCadastrados)
+    for (var idx = 0; idx < acessoriosCadastrados.length; ++idx)
     {
-        console.log(acessorio);
-
         var novaLinha = document.createElement("tr");
+        const acessorio = acessoriosCadastrados[idx];
 
         for (var chave in acessorio)
         {
