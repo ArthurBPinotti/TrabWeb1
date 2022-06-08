@@ -17,7 +17,7 @@
     <link rel="icon" type="image/x-icon" href="/imgs/fav.ico">
   </head>
 
-  <body onload="loginCheck(); recarregaTabelaAcessorios('cadastro')">
+  <body onload="loginCheck()">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a href="index.html"><img class="imgsNav" src="imgs/logo.png" alt="Logo" width="50" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,10 +35,10 @@
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Acessórios
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                 <a class="dropdown-item" href="#">Aquários</a>
                 <a class="dropdown-item" href="#">Ração</a>
                 <a class="dropdown-item" href="#">Brinquedos</a>
@@ -46,10 +46,10 @@
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Espécies
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                 <a class="dropdown-item" href="#">Jabutis</a>
                 <a class="dropdown-item" href="#">Tigre d'Água</a>
                 <a class="dropdown-item" href="#">Tartaruga-de-pente</a>
@@ -120,7 +120,7 @@
             <a href="relatorioAcessorios.html">
               <button class="btn btn-info">Relatório</button>
             </a>
-            <table id="tabelaAcessorios" class="table thead-dark table-striped table-hover table-responsive">
+            <table id="tabelaAcessorios" class="table thead-dark table-striped table-hover table-responsive" onload="recarregaTabelaAcessorios('cadastro')">
                 <thead>
                     <tr>
                         <th class="col-md-1">Código</th>

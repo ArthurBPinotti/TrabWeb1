@@ -97,7 +97,7 @@ function recarregaTabelaAcessorios(tipo) //Limpa e remonta a tabela na tela de c
         if (tipo == "cadastro") //Adiciona os botões para editar e excluir
         {
             novaLinha.innerHTML += '<button onClick="carregaInfo(' + acessorio['codigo'] + ')" class="btnAcao btn-primary align-middle">Editar</button>';
-            novaLinha.innerHTML += '<button onClick="excluiAcessorio(' + acessorio['codigo'] + ')" class="btnAcao btn-danger align-middle">Excluir</button>'
+            novaLinha.innerHTML += '<button onClick="excluiAcessorio(' + acessorio['codigo'] + ')" class="btnAcao btn-danger align-middle">Excluir</button>';
         }
         
         corpoTabela.appendChild(novaLinha);
