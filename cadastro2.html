@@ -17,7 +17,7 @@
     <link rel="icon" type="image/x-icon" href="/imgs/fav.ico">
   </head>
 
-  <body onload="loginCheck(); recarregaTabelaAcessorios('relatorio')">
+  <body onload="loginCheck(); recarregaTabelaAcessorios('cadastro')">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a href="index.html"><img class="imgsNav" src="imgs/logo.png" alt="Logo" width="50" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,10 +35,10 @@
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Acessórios
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                 <a class="dropdown-item" href="#">Aquários</a>
                 <a class="dropdown-item" href="#">Ração</a>
                 <a class="dropdown-item" href="#">Brinquedos</a>
@@ -80,22 +80,48 @@
     <main class="principal flex-shrink-0">
       <div class="container bg-body rounded shadow-sm" >
         <div class="container pt-0 mt-0 align-center">
-          <h1>Relatório de Acessórios</h1>
-          <table id="tabelaAcessoriosRelatorio" class="table thead-dark table-striped table-hover table-responsive">
-              <thead>
-                  <tr>
-                      <th class="col-md-1">Código</th>
-                      <th class="col-md-2">Nome</th>
-                      <th class="col-md-2">Fornecedor</th>
-                      <th class="col-md-1">Valor</th>
-                      <th class="col-md-1">Quantidade em Estoque</th>
-                  </tr>
-              </thead>
-              <tbody id="corpoTabelaAcessoriosRelatorio">
-              </tbody>
-          </table>
+            <div class="cardCadastroAcessorio card login-form-1">
+                <h3>Cadastro de Acessórios</h3>
+                <form id="formRequisicao">
+                  <div class="row justify-content-between text-left">
+                      <div class="form-group col-sm-6 flex-column d-flex"> 
+                          <p id ="teste">aaaaaa</p>
+                      </div>
+                  </div>
+                  <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-6 flex-column d-flex"> 
+                        <label class="form-control-label" for="fId">ID</label> 
+                        <input type="number" id="fId" name="fId" placeholder="Ex: 1" required> 
+                    </div>
+                  </div>
+                  <div class="row justify-content-end">
+                      <div class="form-group col-sm-6"> <input type="submit" onClick="requisicaoRest()" class="btnSubmit" value="Consultar"></div>
+                  </div>
+                </form>
+              </div>
+            </div>
         </div>
-      </div>
+
+        <div class="container">
+            <h3>Acessórios já cadastrados</h3>
+            <a href="relatorioAcessorios.html" target="_blank">
+              <button class="btn btn-info">Relatório</button>
+            </a>
+            <table id="tabelaAcessorios" class="table thead-dark table-striped table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">Código</th>
+                        <th class="col-md-2">Nome</th>
+                        <th class="col-md-2">Fornecedor</th>
+                        <th class="col-md-1">Valor</th>
+                        <th class="col-md-1">Quantidade em Estoque</th>
+                        <th class="col-md-1">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabelaAcessorios">
+                </tbody>
+            </table>
+        </div>
     </main>
 
     <footer class="footer">
