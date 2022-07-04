@@ -163,3 +163,17 @@ body{
 {
   border-radius: 10%;
 }
+
+.escondeResultado
+{
+  display: none !important;
+}
+
+.mostraResultado
+{
+  width: 100%;
+  border-radius: 1rem;
+  padding: 1.5%;
+  margin: 1em;
+  display: inline !important;
+}

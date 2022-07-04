@@ -1,5 +1,6 @@
-export class Objeto{
-    constructor ( id, nome, departamento, endereco, email){
+class Cadastro{
+    constructor ({id, nome, departamento, endereco, email})
+    {
         this.id = id;
         this.nome = nome;
         this.departamento = departamento;
@@ -7,11 +8,12 @@ export class Objeto{
         this.email = email;
     }
 
-    getNome(){
+    getNome()
+    {
         return this.nome;
     }
-    getEmail(){
+    getEMail()
+    {
         return this.email;
     }
-
 }
