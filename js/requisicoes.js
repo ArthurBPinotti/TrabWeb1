@@ -34,7 +34,7 @@ function inserirHistorico(objCadastro)
     novaLinha.appendChild(celEmail);
 
     var btnDelete = document.createElement("button");
-    btnDelete.innerHTML = "Excluir";
+    btnDelete.innerHTML = "Exclusão";
     btnDelete.classList = "btnAcao btn-danger align-middle"
     btnDelete.onclick = () => 
     {
